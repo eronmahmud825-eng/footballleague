@@ -7,12 +7,16 @@
     <title>History Game</title>
     <link rel="stylesheet" href="style.css">
 
-    <!-- Firebase SDK -->
+    <!-- Firebase -->
     <script src="https://www.gstatic.com/firebasejs/9.22.2/firebase-app-compat.js"></script>
     <script src="https://www.gstatic.com/firebasejs/9.22.2/firebase-firestore-compat.js"></script>
 </head>
 
 <body>
+    <div class="table-container">
+        <table id="leagueTable"> ... </table>
+    </div>
+
     <div class="container">
         <h1>History Game</h1>
         <table id="historyTable">
@@ -21,11 +25,12 @@
                     <th>Date</th>
                     <th>Match</th>
                     <th>Score</th>
+                    <th>Action</th>
                 </tr>
             </thead>
             <tbody></tbody>
         </table>
-        <button onclick="location.href='index.html'">⬅ Back</button>
+        <button class="back-btn" onclick="location.href='index.html'">⬅ Back</button>
     </div>
     <script src="script.js"></script>
 </body>
