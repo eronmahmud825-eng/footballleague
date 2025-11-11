@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Match Week</title>
+    <link rel="stylesheet" href="style.css">
+
+    <!-- Firebase SDK -->
+    <script src="https://www.gstatic.com/firebasejs/9.22.2/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.22.2/firebase-firestore-compat.js"></script>
+</head>
+
+<body>
+    <div class="container">
+        <h1>Match Week</h1>
+        <div class="form-container">
+            <label>Password (Admin): <input type="password" id="adminPass"></label><br>
+            <label>Player 1: 
+        <select id="player1">
+          <option value="ERON">ERON</option>
+          <option value="ARIN">ARIN</option>
+          <option value="LAWIN">LAWIN</option>
+        </select>
+      </label><br>
+            <label>Score 1: <input type="number" id="score1" min="0"></label><br>
+            <label>Player 2: 
+        <select id="player2">
+          <option value="ERON">ERON</option>
+          <option value="ARIN">ARIN</option>
+          <option value="LAWIN">LAWIN</option>
+        </select>
+      </label><br>
+            <label>Score 2: <input type="number" id="score2" min="0"></label><br>
+            <label>Date: <input type="date" id="matchDate"></label><br>
+            <button id="saveMatchBtn">Save Match</button>
+            <button onclick="location.href='index.html'">⬅ Back</button>
+        </div>
+    </div>
+    <script src="script.js"></script>
+</body>
+
+</html>
