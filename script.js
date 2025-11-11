@@ -61,17 +61,35 @@ function loadTableFromFirebase() {
 
 // Load match history
 function loadHistory() {
+    const tbody = document.querySelector("#historyTable tbody");
+    if (!tbody) return;
+    tbody.innerHTML = "";
+
     db.collection("matches").get().then(snapshot => {
-        const tbody = document.querySelector("#historyTable tbody");
-        if (!tbody) return;
-        tbody.innerHTML = "";
         snapshot.forEach(doc => {
             const m = doc.data();
             const tr = document.createElement("tr");
-            tr.innerHTML = `<td>${m.date}</td><td>${m.p1} vs ${m.p2}</td><td>${m.s1}-${m.s2}</td>`;
+            tr.innerHTML = `
+        <td>${m.date}</td>
+        <td>${m.p1} vs ${m.p2}</td>
+        <td>${m.s1}-${m.s2}</td>
+        <td><button class="delete-btn" onclick="deleteMatch('${doc.id}')">🗑 Delete</button></td>
+      `;
             tbody.appendChild(tr);
         });
     });
+}
+
+// Delete match (admin only)
+function deleteMatch(id) {
+    const pass = prompt("Enter admin password to delete:");
+    if (pass !== adminPassword) { alert("❌ Wrong password"); return; }
+
+    db.collection("matches").doc(id).delete().then(() => {
+        alert("✅ Match deleted!");
+        loadHistory();
+        loadTableFromFirebase();
+    }).catch(err => console.error(err));
 }
 
 // Save match (admin only)
@@ -93,8 +111,6 @@ if (saveBtn) {
         const match = { p1, p2, s1, s2, date };
         db.collection("matches").add(match)
             .then(() => { alert("✅ Match saved");
-                document.getElementById("score1").value = "";
-                document.getElementById("score2").value = "";
                 loadTableFromFirebase();
                 loadHistory(); })
             .catch(e => { alert("❌ Error saving");
